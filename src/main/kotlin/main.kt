@@ -1,35 +1,37 @@
 fun main(){
     println("oi")
 
-    val contaTaynara = Conta()
-    contaTaynara.titular = "Taynara"
-    contaTaynara.numero = 1644
-    contaTaynara.setSaldo(1000.0)
+    val contaTaynara = Conta("Taynara", 1611)
+    contaTaynara.deposita(1000.00)
 
-    val contaLucas = Conta()
-    contaLucas.titular = "Lucas"
-    contaLucas.numero = 1803
-    contaLucas.setSaldo(1500.0)
+    val contaLucas = Conta("Lucas", 1803)
+    contaLucas.deposita(1500.00)
 
 
     contaTaynara.deposita( 1500.0)
 
-    println("Saldo conta Taynara deposito 1500 ${contaTaynara.getSaldo()}")
+    println("Saldo conta Taynara deposito 1500 ${contaTaynara.saldo}")
 
     contaTaynara.saca(100.0)
-    println("Saldo conta Taynara saque 100 ${contaTaynara.getSaldo()}")
+    println("Saldo conta Taynara saque 100 ${contaTaynara.saldo}")
 
     contaLucas.transfere(contaTaynara, 400.0)
-    println("Saldo conta Taynara ${contaTaynara.getSaldo()}")
-    println("Saldo conta Lucas ${contaLucas.getSaldo()}")
+    println("Saldo conta Taynara ${contaTaynara.saldo}")
+    println("Saldo conta Lucas ${contaLucas.saldo}")
 
 }
 
-class Conta {
-    var titular = ""
-    var numero = 0
-    private var saldo = 0.0
+class Conta (
+    val titular:String,
+    val numero: Int
+    ){
+      var saldo = 0.0
+        private set
 
+//    constructor(titular:String, numero: Int){
+//        this.titular =  titular
+//        this.numero = numero
+//    }
 
     fun deposita ( valor: Double){
         this.saldo += valor
@@ -51,13 +53,4 @@ class Conta {
 
     }
 
-    fun getSaldo() : Double {
-        return saldo
-    }
-
-    fun setSaldo(valor : Double) {
-        if (valor > 0) {
-            saldo = valor
-        }
-    }
 }
